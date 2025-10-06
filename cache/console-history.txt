@@ -1,0 +1,28 @@
+(await usdc.balanceOf("0xCa3edFaA083B17D49d2981143c2d6e0cFf40E7b9")).toString();
+(await usdc.balanceOf("0x35560D273bBbCA5d29C75415E86aA74a3A8e174E")).toString();
+const usdc = await ethers.getContractAt("@openzeppelin/contracts/token/ERC20/ERC20.sol:ERC20", "0x036CbD53842c5426634e7929541eC2318f3dCF7e");
+(await usdc.balanceOf("0xCa3edFaA083B17D49d2981143c2d6e0cFf40E7b9")).toString();
+(await usdc.balanceOf("0x35560D273bBbCA5d29C75415E86aA74a3A8e174E")).toString();
+const usdc = await ethers.getContractAt("@openzeppelin/contracts/token/ERC20/ERC20.sol:ERC20", "0x036CbD53842c5426634e7929541eC2318f3dCF7e");
+(await usdc.allowance("0x73A9f11e52DDAA3717Fb79C5BF2f007e7397e1C2", "0x35560D273bBbCA5d29C75415E86aA74a3A8e174E")).toString();
+await usdc.connect(signer).approve("0x35560D273bBbCA5d29C75415E86aA74a3A8e174E", ethers.parseUnits("30", 6));
+const signer = await ethers.getSigner("0x73A9f11e52DDAA3717Fb79C5BF2f007e7397e1C2");
+const usdc = await ethers.getContractAt("@openzeppelin/contracts/token/ERC20/ERC20.sol:ERC20", "0x036CbD53842c5426634e7929541eC2318f3dCF7e");
+await usdc.connect(signer).approve("0x35560D273bBbCA5d29C75415E86aA74a3A8e174E", ethers.parseUnits("30", 6));
+const signer = await ethers.getSigner("0x73A9f11e52DDAA3717Fb79C5BF2f007e7397e1C2");
+const usdc = await ethers.getContractAt("@openzeppelin/contracts/token/ERC20/ERC20.sol:ERC20", "0x036CbD53842c5426634e7929541eC2318f3dCF7e");
+await escrow.usdc();
+const escrow = await ethers.getContractAt("Escrow", "0x35560D273bBbCA5d29C75415E86aA74a3A8e174E");
+await escrow.usdc();
+const escrow = await ethers.getContractAt("Escrow", "0x3746B79aF0E8a655e349E611E156E22a216Bf0ce");
+(await usdc.balanceOf("0x73A9f11e52DDAA3717Fb79C5BF2f007e7397e1C2")).toString();
+const usdc = await ethers.getContractAt("@openzeppelin/contracts/token/ERC20/ERC20.sol:ERC20", "0x036CbD53842c5426634e7929541eC2318f3dCF7e");
+(await usdc.balanceOf("0x73A9f11e52DDAA3717Fb79C5BF2f007e7397e1C2")).toString();
+const usdc = await ethers.getContractAt("@openzeppelin/contracts/token/ERC20/ERC20.sol:ERC20", "0x036CbD53842c5426634e7929541eC2318f3dCF7e");
+const usdc = await ethers.getContractAt("MockUSDC", "0xa1908BCEDa758a4Af26dcFE7CD7507619a75C0Ff");
+(await usdc.balanceOf("0x73A9f11e52DDAA3717Fb79C5BF2f007e7397e1C2")).toString();");const usdc = await ethers.getContractAt("MockUSDC", "0xa1908BCEDa758a4Af26dcFE7CD7507619a75C0Ff
+(await ethers.provider.getBalance("0x6F072C39423F15AD0D57C5CeD599DBf071E3F3FD")).toString();
+(await ethers.provider.getBalance("0x73A9f11e52DDAA3717Fb79C5BF2f007e7397e1C2")).toString();
+0x6F072C39423F15AD0D57C5CeD599DBf071E3F3FD
+(await ethers.provider.getBalance("0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199")).toString();
+(await ethers.provider.getBalance("0x73A9f11e52DDAA3717Fb79C5BF2f007e7397e1C2")).toString();

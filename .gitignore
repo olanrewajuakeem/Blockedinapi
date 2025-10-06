@@ -1,0 +1,10 @@
+__pycache__/
+cache/
+migrations/
+venv/
+node_modules/
+artifacts/
+.env
+*.pyc
+*.pyo
+*.log
