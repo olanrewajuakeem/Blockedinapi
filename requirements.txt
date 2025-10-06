@@ -14,7 +14,7 @@ ckzg==2.1.4
 click==8.3.0
 cytoolz==1.0.1
 deprecation==2.1.0
-dnspython==1.16.0
+dnspython>=2.4.2
 email-validator==2.3.0
 eth-account==0.13.7
 eth-hash==0.7.1
