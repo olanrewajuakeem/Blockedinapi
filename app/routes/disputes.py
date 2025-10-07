@@ -29,8 +29,6 @@ class Disputes(Resource):
         user = User.query.filter_by(uid=data['initiator_uid']).first()
         if not user:
             return {"error": f"User not found for UID {data['initiator_uid']}"}, 404
-        if user.role not in ['hirer', 'provider', 'both']:
-            return {"error": "Only hirers or providers can file disputes"}, 403
         escrow = Escrow.query.filter_by(gig_id=data['gig_id']).first()
         if not escrow:
             return {"error": "Escrow not funded for this gig"}, 400
@@ -40,7 +38,7 @@ class Disputes(Resource):
                 gig_id=data['gig_id'],
                 initiator_uid=data['initiator_uid'],
                 reason=data['reason'],
-                status='pending',  # Align with reviews
+                status='pending',
                 created_at=datetime.utcnow()
             )
             db.session.add(dispute)

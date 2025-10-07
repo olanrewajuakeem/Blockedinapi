@@ -1,5 +1,6 @@
 from app.db import db
 from datetime import datetime
+import uuid
 
 class GigInstance(db.Model):
     __tablename__ = 'gig_instances'

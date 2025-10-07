@@ -11,7 +11,7 @@ fund_model = escrow_ns.model('FundEscrow', {
     'gig_id': fields.String(required=True),
     'provider_address': fields.String(required=True),
     'amount_usdc': fields.Float(required=True),
-    'signed_tx': fields.String(required=True)  
+    'signed_tx': fields.String(required=True)
 })
 
 approve_model = escrow_ns.model('ApproveGig', {
@@ -37,12 +37,13 @@ class FundEscrow(Resource):
         if not all([gig_id, provider_address, amount, signed_tx]):
             return {"error": "Missing required fields"}, 400
 
-        
         w3 = Web3(Web3.HTTPProvider(current_app.config['BASE_RPC_URL']))
         if not w3.is_address(provider_address):
             return {"error": "Invalid provider address"}, 400
+        user = User.query.filter_by(wallet_address=provider_address).first()
+        if not user or not user.is_provider:
+            return {"error": "Provider address must belong to a provider"}, 400
 
-    
         try:
             tx_hash = w3.eth.send_raw_transaction(signed_tx)
             receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
@@ -52,7 +53,6 @@ class FundEscrow(Resource):
             return {"error": f"Transaction failed: {str(e)}"}, 400
 
         try:
-           
             escrow = Escrow(
                 gig_id=gig_id,
                 provider_address=provider_address,
@@ -62,7 +62,7 @@ class FundEscrow(Resource):
             fee = Fee.create_fee(gig_id=gig_id, amount=amount * 0.1)
             instance = GigInstance.create_gig_instance(
                 gig_id=gig_id,
-                hirer_wallet=provider_address,  
+                hirer_wallet=provider_address,
                 escrow_address=current_app.config['ESCROW_CONTRACT_ADDRESS']
             )
             db.session.add(escrow)

@@ -13,7 +13,7 @@ review_model = reviews_ns.model('Review', {
     'rating': fields.Integer(required=True),
     'comment': fields.String,
     'completion_status': fields.String(enum=['completed', 'disputed'], default='pending'),
-    'signed_tx': fields.String  
+    'signed_tx': fields.String  # Required for 'completed' status
 })
 
 @reviews_ns.route('')
@@ -27,7 +27,7 @@ class Reviews(Resource):
         user = User.query.filter_by(uid=data['reviewer_uid']).first()
         if not user:
             return {"error": f"User not found for UID {data['reviewer_uid']}"}, 404
-        if user.role not in ['hirer', 'both']:
+        if user.is_provider:
             return {"error": "Only hirers can submit reviews"}, 403
 
         try:
@@ -42,7 +42,6 @@ class Reviews(Resource):
                 signed_tx = data.get('signed_tx')
                 if not signed_tx:
                     return {"error": "signed_tx required for completed status"}, 400
-
                 w3 = Web3(Web3.HTTPProvider(current_app.config['BASE_RPC_URL']))
                 try:
                     tx_hash = w3.eth.send_raw_transaction(signed_tx)
@@ -52,7 +51,6 @@ class Reviews(Resource):
                 except Exception as e:
                     db.session.rollback()
                     return {"error": f"Failed to approve gig: {str(e)}"}, 400
-
                 return {
                     "message": "Review created, gig approved",
                     "id": review['id'],
