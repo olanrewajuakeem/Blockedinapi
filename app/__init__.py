@@ -3,7 +3,7 @@ from flask_restx import Api
 from app.config import Config
 from app.db import db, init_db
 from flask_migrate import Migrate
-from app.models import User, Gig, Escrow, Fee, Dispute, Review, GigInstance
+from app.models import User, Gig, Escrow, Fee, Dispute, Review, GigInstance, waitlist
 import jwt
 import requests
 import logging
@@ -38,6 +38,7 @@ def create_app():
     from app.routes.reviews import reviews_ns
     from app.routes.disputes import disputes_ns
     from app.routes.deliverables import deliverables_ns
+    from app.routes.waitlist import waitlist_ns
 
     api.add_namespace(escrow_ns, path='/escrow')
     api.add_namespace(users_ns, path='/users')
@@ -45,6 +46,7 @@ def create_app():
     api.add_namespace(reviews_ns, path='/reviews')
     api.add_namespace(disputes_ns, path='/disputes')
     api.add_namespace(deliverables_ns, path='/deliverables')
+    api.add_namespace(waitlist_ns, path='/api/waitlist')
 
 
     return app
