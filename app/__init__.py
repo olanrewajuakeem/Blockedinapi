@@ -41,12 +41,12 @@ def create_app():
     from app.routes.waitlist import waitlist_ns
 
     api.add_namespace(escrow_ns, path='/escrow')
-    api.add_namespace(users_ns, path='/users')
+    api.add_namespace(users_ns, path='/user')
     api.add_namespace(gigs_ns, path='/gigs')
     api.add_namespace(reviews_ns, path='/reviews')
     api.add_namespace(disputes_ns, path='/disputes')
     api.add_namespace(deliverables_ns, path='/deliverables')
-    api.add_namespace(waitlist_ns, path='/api/waitlist')
+    api.add_namespace(waitlist_ns, path='/waitlist')
 
 
     return app

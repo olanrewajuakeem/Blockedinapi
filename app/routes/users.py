@@ -2,7 +2,7 @@ from flask_restx import Namespace, Resource, fields
 from app.models import User
 from app.db import db
 
-users_ns = Namespace('users', description='User operations')
+users_ns = Namespace('user', description='User operations')
 
 # --- Models ---
 
@@ -42,7 +42,7 @@ query_model = users_ns.model('QueryUser', {
 
 # --- Routes ---
 
-@users_ns.route('')
+@users_ns.route('/')
 class Users(Resource):
     @users_ns.expect(user_model)
     def post(self):

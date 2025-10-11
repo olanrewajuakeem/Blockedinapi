@@ -1,7 +1,7 @@
 from flask import request
 from flask_restx import Namespace, Resource, fields
 from app import db
-from app.models import waitlist
+from app.models.waitlist import Waitlist  # ✅ Correct import
 
 waitlist_ns = Namespace('waitlist', description='Waitlist API')
 
@@ -28,10 +28,10 @@ class WaitlistResource(Resource):
             return {'message': 'All fields (name, email, ip_address, expected_role) are required.'}, 400
 
         # Prevent duplicate emails
-        if waitlist.query.filter_by(email=email).first():
+        if Waitlist.query.filter_by(email=email).first():
             return {'message': 'Email already exists in waitlist.'}, 409
 
-        new_entry = waitlist(
+        new_entry = Waitlist(
             name=name,
             email=email,
             ip_address=ip_address,
@@ -46,7 +46,7 @@ class WaitlistResource(Resource):
     @waitlist_ns.response(200, 'Success')
     def get(self):
         """Fetch all waitlist entries"""
-        waitlist = waitlist.query.all()
+        entries = Waitlist.query.all() 
         return [
             {
                 'id': entry.id,
@@ -56,5 +56,5 @@ class WaitlistResource(Resource):
                 'expected_role': entry.expected_role,
                 'created_at': entry.created_at
             }
-            for entry in waitlist
+            for entry in entries
         ], 200
