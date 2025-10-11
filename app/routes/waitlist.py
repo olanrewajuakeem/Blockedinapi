@@ -1,7 +1,7 @@
 from flask import request
 from flask_restx import Namespace, Resource, fields
 from app import db
-from app.models.waitlist import Waitlist  # ✅ Correct import
+from app.models.waitlist import Waitlist
 
 waitlist_ns = Namespace('waitlist', description='Waitlist API')
 
@@ -46,15 +46,5 @@ class WaitlistResource(Resource):
     @waitlist_ns.response(200, 'Success')
     def get(self):
         """Fetch all waitlist entries"""
-        entries = Waitlist.query.all() 
-        return [
-            {
-                'id': entry.id,
-                'name': entry.name,
-                'email': entry.email,
-                'ip_address': entry.ip_address,
-                'expected_role': entry.expected_role,
-                'created_at': entry.created_at
-            }
-            for entry in entries
-        ], 200
+        entries = Waitlist.query.all()
+        return [entry.to_dict() for entry in entries], 200
